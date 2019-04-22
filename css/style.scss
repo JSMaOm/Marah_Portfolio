@@ -1,0 +1,996 @@
+@import 'normalize';
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700'); */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800');
+
+$color-1: #6b0d26;
+$color-2: #f2ccba;
+$color-3: #b23a48;
+$color-4: #fcb9b2;
+$color-5: #a03641;
+$bg: #a03641;
+$shadow-light: rgba($color-1, 0.8);
+$xl: 1200px;
+$rxl: 1201px;
+$lg: 992px;
+$rlg: 993px;
+$md: 768px;
+$rmd: 769px;
+$sm: 576px;
+$rsm: 577px;
+
+body {
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: $color-2;
+  line-height: 1.5;
+  background-color: $color-5;
+  position: relative;
+  width: 100%;
+}
+
+/* general */
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 24px;
+  font-weight: 400;
+  position: relative;
+  transition: all 0.1s cubic-bezier(0.77, 0, 0.175, 1);
+
+  &_2 {
+    background-color: $color-2;
+    color: $color-5;
+
+    &::after {
+      background-color: inherit;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 100px;
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: -1;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &:hover::after {
+    transform: scale(1.3, 1.6);
+    opacity: 0;
+  }
+}
+
+/* bg flower */
+
+$stroke-1: 7902;
+.bg {
+  position: absolute;
+
+  &_up {
+    top: 0%;
+    left: 0;
+
+    @media screen and (max-width: $lg) {
+      & {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &_down {
+    bottom: 0%;
+    right: 0%;
+  }
+
+  &__img {
+    display: block;
+    width: 600px;
+    height: 600px;
+    @media screen and (max-width: $sm) {
+      & {
+        width: 90vw;
+        height: 90vw;
+      }
+    }
+
+    path {
+      stroke: $color-1;
+      fill: none;
+      opacity: 0.3;
+    }
+
+    path#sec-1 {
+      stroke-dasharray: $stroke-1;
+      stroke-dashoffset: $stroke-1;
+      animation: secAnimate-1 5s ease-in infinite alternate;
+    }
+
+    @keyframes secAnimate-1 {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}
+
+/* menu */
+.menu {
+  position: fixed;
+  top: 40px;
+  right: 75px;
+  width: 30px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 9999;
+
+  &__bar {
+    transition: right 350ms cubic-bezier(0.77, 0, 0.175, 1),
+      transform 350ms cubic-bezier(0.77, 0, 0.175, 1),
+      background-color 2s cubic-bezier(0.77, 0, 0.175, 1);
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: 3px;
+    height: 24px;
+    background-color: $color-2;
+    backface-visibility: hidden;
+    box-shadow: 2px 2px 4px $shadow-light;
+    transform: translate3d(0, -50%, 0) scale(1, 1) rotate(10deg);
+    transform-origin: center;
+  }
+
+  &__bar:nth-of-type(2) {
+    right: 10px;
+  }
+
+  &_open &__bar {
+    right: 0;
+    transform: translate3d(0, -50%, 0) scale(1, 1) rotate(225deg);
+    background-color: $color-5;
+    box-shadow: none;
+  }
+
+  &_open &__bar:nth-of-type(2) {
+    transform: translate3d(0, -50%, 0) scale(1, 1) rotate(-225deg);
+  }
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: scale(0, 0);
+  transform-origin: 100% 0;
+  transition: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition-delay: 1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+
+  @media screen and (max-width: $sm) {
+    & {
+      align-items: flex-start;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    transform-origin: 100% 0;
+    transform: scale(0, 0) translate(50%, -50%);
+    transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    transition-delay: 0.9s;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250vw;
+    height: auto;
+    padding-top: 250vw;
+    border-radius: 50%;
+    background-color: $color-2;
+    z-index: -1;
+  }
+
+  &_open {
+    transform: scale(1, 1);
+    transition-delay: 0s;
+
+    /* @media screen and (max-width: $lg) {
+      & {
+        transform: scale(0.7, 0.7);
+      }
+    } */
+  }
+
+  &_open::after {
+    transform: scale(1, 1) translate(50%, -50%);
+    transition-delay: 0s;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @media screen and (max-width: $sm) {
+      & {
+        padding-top: 15%;
+      }
+    }
+  }
+
+  &__item {
+    position: relative;
+    display: inline-block;
+    height: 90px;
+    opacity: 0;
+    transform: scale(0.8) translate(200px, 0);
+    transform-origin: 100% 0;
+    transition: all 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+    transition-delay: 0.25s;
+    font-size: 72px;
+    color: rgba($color-5, 0.3);
+
+    @media screen and (max-width: $lg) {
+      & {
+        font-size: 64px;
+      }
+    }
+
+    @media screen and (max-width: $sm) {
+      & {
+        font-size: 24px;
+        height: 60px;
+      }
+    }
+  }
+
+  $transitionDelayF_step: 0.25s;
+
+  @for $i from 2 through 4 {
+    $transitionDelayF_step: $transitionDelayF_step + 0.05;
+    &__item:nth-child(#{$i}) {
+      transition-delay: $transitionDelayF_step;
+    }
+  }
+
+  &_open &__item {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+    transition-delay: 0.75s;
+  }
+
+  $transitionDelayB_step: 0.75s;
+
+  @for $i from 2 through 4 {
+    $transitionDelayB_step: $transitionDelayB_step + 0.05;
+    &_open &__item:nth-child(#{$i}) {
+      transition-delay: $transitionDelayB_step;
+    }
+  }
+
+  &__link-wrap {
+    height: 90px;
+    @media screen and (max-width: $sm) {
+      & {
+        height: 60px;
+      }
+    }
+  }
+
+  &__link {
+    display: inline-block;
+  }
+
+  &__link-mask {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 90px;
+    transform: translateX(-102%);
+    transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
+    overflow: hidden;
+    @media screen and (max-width: $sm) {
+      & {
+        height: 60px;
+      }
+    }
+
+    span {
+      display: inline-block;
+      position: absolute;
+      transform: translateX(102%);
+      transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
+      height: 90px;
+      font-size: 72px;
+      color: $color-5;
+
+      @media screen and (max-width: $lg) {
+        & {
+          font-size: 64px;
+        }
+      }
+
+      @media screen and (max-width: $sm) {
+        & {
+          font-size: 24px;
+          height: 60px;
+        }
+      }
+    }
+
+    i {
+      color: $color-4;
+      font-style: normal;
+    }
+  }
+  &__item:hover &__link-mask,
+  &__item:hover &__link-mask > span {
+    transform: translateX(0);
+  }
+
+  &__item_selected &__link-mask,
+  &__item_selected &__link-mask > span {
+    transform: translateX(0);
+  }
+}
+
+/* pages */
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.pages {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  .page {
+    min-height: 100vh;
+    width: 100%;
+  }
+}
+
+/* home */
+.home {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  @media screen and (max-width: $lg) {
+    & {
+      justify-content: center;
+    }
+  }
+  &__myphoto {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 100%;
+    margin-right: 100px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    margin-right: 180px;
+
+    @media screen and (max-width: $xl) {
+      & {
+        margin-right: 40px;
+      }
+    }
+
+    @media screen and (max-width: $lg) {
+      & {
+        margin-right: 0;
+      }
+    }
+    h1,
+    h2 {
+      font-weight: 400;
+      color: $color-2;
+      text-align: center;
+      text-shadow: 2px 2px 4px $shadow-light;
+    }
+
+    h1 {
+      font-size: 64px;
+      margin-bottom: 30px;
+      @media screen and (max-width: $sm) {
+        & {
+          font-size: 12vw;
+        }
+      }
+    }
+
+    h2 {
+      font-size: 32px;
+      @media screen and (max-width: $sm) {
+        & {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}
+
+/* postfolio */
+
+.slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 10px 10px -5px $shadow-light;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__item {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 10;
+  }
+
+  &__img {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__prevBtn,
+  &__nextBtn {
+    position: absolute;
+    top: 50%;
+    display: block;
+    padding: 15px 0;
+    cursor: pointer;
+    z-index: 98;
+
+    span {
+      display: block;
+      width: 60px;
+      height: 2px;
+      background-color: $color-4;
+      transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+
+      @media screen and (max-width: $lg) {
+        & {
+          display: none;
+        }
+      }
+    }
+
+    &::after,
+    &::before {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      position: absolute;
+      top: -100%;
+      z-index: 99;
+      transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    &::before {
+      background-color: $color-1;
+    }
+
+    &::after {
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center;
+    }
+
+    &:hover span {
+      transform: scale(0.1, 1);
+    }
+  }
+
+  &__prevBtn {
+    left: -15%;
+    transform: translate(50%, -50%);
+
+    @media screen and (min-width: $rlg) {
+      & {
+        left: -15%;
+      }
+    }
+
+    @media screen and (max-width: $lg) {
+      & {
+        left: 0;
+      }
+    }
+
+    span {
+      transform-origin: 100% 50%;
+    }
+
+    &::before {
+      transform: translate(-30%, 50%) scale(0.2, 0.2);
+      left: -50%;
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(-50%, 50%) scale(1);
+        }
+      }
+    }
+
+    &::after {
+      transform: translate(-30%, 50%) scale(0.01, 0.01);
+      left: -30%;
+      background-image: url('../img/chevron-small-left.svg');
+
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(-50%, 50%) scale(1);
+        }
+      }
+    }
+
+    &:hover::before {
+      transform: translate(100%, 50%) scale(1);
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(-50%, 50%) scale(1);
+        }
+      }
+    }
+
+    &:hover::after {
+      transform: translate(75%, 50%) scale(1);
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(-50%, 50%) scale(1);
+        }
+      }
+    }
+  }
+
+  &__nextBtn {
+    transform: translate(-50%, -50%);
+
+    @media screen and (min-width: $rlg) {
+      & {
+        right: -15%;
+      }
+    }
+
+    @media screen and (max-width: $lg) {
+      & {
+        right: 0;
+      }
+    }
+
+    span {
+      transform-origin: 0 50%;
+    }
+
+    &::after {
+      transform: translate(30%, 50%) scale(0.01, 0.01);
+      right: -30%;
+      background-image: url('../img/chevron-small-right.svg');
+
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(50%, 50%) scale(1);
+        }
+      }
+    }
+
+    &::before {
+      transform: translate(30%, 50%) scale(0.2, 0.2);
+      right: -50%;
+
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(50%, 50%) scale(1);
+        }
+      }
+    }
+
+    &:hover::before {
+      transform: translate(-100%, 50%) scale(1);
+
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(50%, 50%) scale(1);
+        }
+      }
+    }
+
+    &:hover::after {
+      transform: translate(-75%, 50%) scale(1);
+
+      @media screen and (max-width: $lg) {
+        & {
+          transform: translate(50%, 50%) scale(1);
+        }
+      }
+    }
+  }
+
+  &__dotWrap {
+    display: flex;
+    position: absolute;
+    top: 105%;
+    left: 50%;
+    transform: translate(-50%, 15%);
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    transform: scale(0.5, 0.5);
+    transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    border-radius: 50%;
+    background-color: rgba($color-1, 0.7);
+    cursor: pointer;
+    box-shadow: 0 5px 10px -5px $shadow-light;
+
+    &:hover {
+      background-color: $color-1;
+      box-shadow: none;
+    }
+
+    &_active {
+      transform: scale(0.8, 0.8);
+      background-color: rgba($color-2, 0.9);
+      &:hover {
+        background-color: $color-2;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-right: 3px;
+    }
+  }
+}
+
+.desc {
+  &__title {
+    font-size: 48px;
+    font-weight: inherit;
+    color: $color-2;
+    margin-bottom: 30px;
+
+    @media screen and (max-width: $lg) {
+      & {
+        text-align: center;
+      }
+    }
+
+    @media screen and (max-width: $sm) {
+      & {
+        font-size: 32px;
+      }
+    }
+  }
+
+  &__tool-list {
+    padding: 0 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    @media screen and (max-width: $md) {
+      & {
+        flex-flow: column nowrap;
+      }
+    }
+
+    @media screen and (max-width: $sm) {
+      & {
+        padding: 0;
+      }
+    }
+  }
+
+  &__mask {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 90px;
+    transform: translateX(-102%);
+    transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
+    overflow: hidden;
+
+    span {
+      display: inline-block;
+      position: absolute;
+      transform: translateX(102%);
+      transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
+      height: 90px;
+      font-size: 32px;
+      font-weight: 800;
+      color: $color-5;
+    }
+  }
+
+  &__tool-item {
+    display: inline-block;
+    padding: 20px 10px;
+    font-size: 24px;
+    font-weight: 400;
+    position: relative;
+    color: $color-2;
+    transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+
+    @media screen and (max-width: $sm) {
+      & {
+        font-size: 18px;
+      }
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scaleX(1);
+      width: 100%;
+      height: 4px;
+      transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+      transform-origin: 0 0;
+      background-color: $color-5;
+    }
+
+    &_highlight {
+      font-weight: 600;
+      &::before {
+        transform: translate(-50%, -50%) scaleX(0);
+      }
+    }
+  }
+
+  &__btn {
+    text-align: center;
+    margin-top: 100px;
+  }
+}
+
+.portfolio {
+  padding: 100px 0 70px;
+  &__slider {
+    width: 760px;
+    height: 432px;
+    background-color: transparent;
+    margin: 0 auto;
+
+    @media screen and (max-width: $lg) {
+      & {
+        width: 100%;
+        height: 382px;
+      }
+    }
+  }
+
+  &__desc {
+    margin-top: 150px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
+  &__input {
+    color: $color-2;
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    margin-bottom: 30px;
+    border: 0;
+    border-bottom: 2px solid $color-1;
+    border-radius: 0;
+    font-size: 24px;
+    line-height: 40px;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &::placeholder {
+      color: rgba($color-2, 0.5);
+    }
+
+    &:focus {
+      outline: 0;
+      border-color: $color-2;
+    }
+
+    &_ext {
+      resize: none;
+      &:focus {
+        height: 240px;
+      }
+    }
+  }
+
+  &__btn {
+    align-self: flex-end;
+  }
+}
+
+/* about section */
+
+.about {
+  padding: 100px 0 70px;
+  &__me {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media screen and (max-width: $lg) {
+      & {
+        flex-flow: column nowrap;
+        align-items: center;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 400;
+
+    @media screen and (max-width: $sm) {
+      & {
+        font-size: 32px;
+      }
+    }
+  }
+
+  &__text {
+    width: 55%;
+    padding-right: 75px;
+    font-size: 24px;
+
+    @media screen and (max-width: $lg) {
+      & {
+        width: 100%;
+        padding: 30px 0 0;
+        text-align: center;
+      }
+    }
+
+    @media screen and (max-width: $md) {
+      & {
+        font-size: 24px;
+      }
+    }
+  }
+
+  &__wrapper {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: $lg) {
+      & {
+        width: 50%;
+        order: -1;
+      }
+    }
+
+    @media screen and (max-width: $lg) {
+      & {
+        width: 100%;
+      }
+    }
+  }
+
+  &__img-box {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    /* width: 500px; */
+    box-shadow: 0 10px 10px -5px $shadow-light;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__mylinks {
+    margin-top: 30px;
+    width: 70%;
+    height: 50px;
+    background-color: $color-2;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (max-width: $lg) and (min-width: $rsm) {
+      & {
+        width: 100%;
+      }
+    }
+  }
+
+  &__link-item {
+    display: inline-block;
+    padding: 0 15px;
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  &__link-icon {
+    fill: $color-1;
+  }
+}
+
+/* contact section */
+
+.contact {
+  padding: 100px 0 70px;
+  text-align: center;
+
+  &__form {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &__text {
+    font-size: 32px;
+    font-weight: 400;
+    color: $color-2;
+    margin: 0;
+    margin-bottom: 100px;
+
+    @media screen and (max-width: $md) {
+      & {
+        font-size: 24px;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "project1": {
+    "src": "img/projects/project1.jpg",
+    "tools": ["HTML", "CSS", "JavaScript", "SCSS"],
+    "url": "https://jsmaom.github.io/landing-page-training/"
+  },
+  "project2": {
+    "src": "img/projects/project2.jpg",
+    "tools": ["HTML", "CSS", "React"],
+    "url": "https://jsmaom.github.io/template-challenge/"
+  },
+  "project3": {
+    "src": "img/projects/project3.jpg",
+    "tools": ["HTML", "SCSS", "JavaScript"],
+    "url": "https://jsmaom.github.io/Memory-Game/"
+  },
+  "project4": {
+    "src": "img/projects/project4.jpg",
+    "tools": ["HTML", "CSS", "JavaScript"],
+    "url": "https://jsmaom.github.io/DIONE/"
+  },
+  "project5": {
+    "src": "img/projects/project5.jpg",
+    "tools": ["HTML", "CSS", "JavaScript"],
+    "url": "https://jsmaom.github.io/Marah-Assignment/"
+  }
+}
