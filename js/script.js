@@ -29,7 +29,7 @@ class Mix_Slider {
     let _ = this.dif;
     _.dotsWrap.querySelector('.slider__dot_active').classList.remove('slider__dot_active');
     let dotNumber = _.curSlide;
-    if (_.curSlide === 0) dotNumber = 3;
+    if (_.curSlide === 0) dotNumber = _.totalSlides - 1;
     else if (_.curSlide === _.totalSlides + 1) dotNumber = 1;
     let newDot = _.dotsWrap.querySelector(`[data-slide='${dotNumber}']`);
     newDot.classList.add('slider__dot_active');
